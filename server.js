@@ -48,19 +48,26 @@ app.get('/api/waitlist', async (req,res) => {
 })
 
 app.post('/api/tables', async (req, res) => {
+    const data = req.body;
     if(reservations.length < 6) {
         reservations.push(req.body);
+        res.status(200).json({
+            status: 'success',
+            list: 'reservation',
+            data: {
+                data
+            }
+        })
     } else {
         waitlist.push(req.body);
+        res.status(200).json({
+            status: 'success',
+            list: 'waitlist',
+            data: {
+                data
+            }
+        })
     }
-    const data = req.body;
-    //console.log(data);
-    res.status(200).json({
-        status: 'success',
-        data: {
-            data
-        }
-    })
 })
 
 //START SERVER

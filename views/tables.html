@@ -89,7 +89,7 @@
 				console.log("------------------------------------")
 
 				// Loop through and display each of the customers
-				for (var i=0; i<tableData.length; i++){
+				for (var i=0; i<tableData.data.reservations.length; i++){
 
 					// Create the HTML Well (Section) and Add the table content for each reserved table
 					var tableSection = $("<div>");
@@ -101,7 +101,7 @@
 
 
 					// Then display the remaining fields in the HTML (Section Name, Date, URL)
-					$("#tableWell-"+ i+1).append('<h2><span class="label label-primary">' + tableNumber + "</span> | " + tableData[i].customerID + "</h2>");
+					$("#tableWell-"+ i+1).append('<h2><span class="label label-primary">' + tableNumber + "</span> | " + tableData.data.reservations[i].customerID + "</h2>");
 				}
 			});
 	}
@@ -122,11 +122,11 @@
 				console.log("------------------------------------");
 
 				// Here we then log the NYTData to console, where it will show up as an object.
-				console.log(waitlistData);
+				console.log(waitlistData.data.waitlist);
 				console.log("------------------------------------")
 
 				// Loop through and display each of the customers
-				for (var i=0; i<waitlistData.length; i++){
+				for (var i=0; i<waitlistData.data.waitlist.length; i++){
 
 					// Create the HTML Well (Section) and Add the table content for each reserved table
 					var waitlistSection = $("<div>");
@@ -137,7 +137,7 @@
 					var tableNumber = i + 1;
 
 					// Then display the remaining fields in the HTML (Section Name, Date, URL)
-					$("#waitlistWell-"+ i+1).append('<h2><span class="label label-primary">' + tableNumber + "</span> | " + waitlistData[i].customerID + "</h2>");
+					$("#waitlistWell-"+ i+1).append('<h2><span class="label label-primary">' + tableNumber + "</span> | " + waitlistData.data.waitlist[i].customerID + "</h2>");
 				}
 			});
 	}
