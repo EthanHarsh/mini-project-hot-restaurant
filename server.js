@@ -1,10 +1,14 @@
 const express = require('express');
+const path = require('path');
 
+var reservations = [];
+var waitlist = [];
 
 const app = express();
 
 //serves public folder to client
-app.use(express.static(__dirname + '/public'));
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 //middleware that adds request time to request
 app.use((req, res, next) => {
     req.requestTime = new Date().toISOString();
@@ -13,9 +17,51 @@ app.use((req, res, next) => {
 
 //Gets homepage
 app.get('/', async (req, res) => {
-    res.render('index');
+    res.sendFile(path.join(__dirname+'/views/index.html'));
 })
 
+app.get('/tables', async (req, res) => {
+    res.sendFile(path.join(__dirname+'/views/tables.html'));
+})
+
+app.get('/reserve', async (req, res) => {
+    res.sendFile(path.join(__dirname+'/views/reserve.html'));
+})
+
+app.get('/api/tables', async (req, res) => {
+    
+    res.status(200).json({
+        status: 'success',
+        data: {
+            reservations
+        }
+    })
+})
+
+app.get('/api/waitlist', async (req,res) => {
+    res.status(200).json({
+        status: 'success',
+        data: {
+            waitlist
+        }
+    })
+})
+
+app.post('/api/tables', async (req, res) => {
+    if(reservations.length < 6) {
+        reservations.push(req.body);
+    } else {
+        waitlist.push(req.body);
+    }
+    const data = req.body;
+    //console.log(data);
+    res.status(200).json({
+        status: 'success',
+        data: {
+            data
+        }
+    })
+})
 
 //START SERVER
 const port = process.env.PORT || 4000;
