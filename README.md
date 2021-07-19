@@ -4,7 +4,7 @@
 ## Deployed Application
 [Heroku](https://mini-project-hot-restaurant.herokuapp.com/)
 
-![Application Screenshot](public/assets/img/screenshot.png)
+![Application Screenshot](public/screenshot.png)
 
 ## Description
 Get a reservation at the hottest restaurant in town! Hurry because there's only 5 tables in the place.
